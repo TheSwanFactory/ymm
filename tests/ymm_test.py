@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
 import pytest
-from .context import ymm
-
+from .context import *
 
 @pytest.fixture
-def ymm():
-    return True
+def y():
+    print(dir(ymm))
+    return ymm.load_file(TEST_FILE)
 
-def test_load(ymm):
-    assert ymm
+def test_load(y):
+    assert y
+    assert y.yaml

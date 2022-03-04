@@ -1,6 +1,6 @@
-# CQML v0.1
+# ymm v0.1
 # Compact Query Meta-language
-# https://github.com/TheSwanFactory/hclang/blob/master/hc/cqml.hc
+# https://github.com/TheSwanFactory/hclang/blob/master/hc/ymm.hc
 
 # TODO: https://github.com/LucaCanali/sparkMeasure
 

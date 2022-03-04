@@ -2,6 +2,8 @@
 import pytest
 from .context import *
 
+FIRST_KEY='install'
+
 @pytest.fixture
 def y():
     print(dir(ymm))
@@ -10,3 +12,8 @@ def y():
 def test_load(y):
     assert y
     assert y.yaml
+    assert y.yaml[FIRST_KEY]
+
+def test_run(y):
+    result = y.run(FIRST_KEY)
+    assert FIRST_KEY in result[0]

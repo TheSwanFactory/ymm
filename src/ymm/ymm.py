@@ -15,7 +15,7 @@ class YMM:
         self.log(args)
         result = subprocess.run(args, stdout=subprocess.PIPE)
         msg = result.stdout.decode("utf-8")
-        self.log(f'# {msg}')
+        print(f'# {msg}')
         return msg.strip()
 
     def log(self, arg):

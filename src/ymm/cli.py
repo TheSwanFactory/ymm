@@ -18,7 +18,6 @@ parser.add_argument('-v','--version', action='version',
 def add_versions(ctx):
     digits = re.findall(r'\d+', __version__)
     last = int(digits[-1])
-    print(last)
     devNext = __version__.replace(f'dev{last}',f'dev{last+1}')
     ctx['__version__'] = __version__
     ctx['__version_digits__'] = digits
@@ -26,12 +25,9 @@ def add_versions(ctx):
     return ctx
 
 def context(args):
-    print(args)
     ctx = add_versions(dict(os.environ))
     for arg in vars(args):
         value = getattr(args, arg)
-        print(arg)
-        print(value)
         ctx[arg] = getattr(args, arg)
     return ctx
 

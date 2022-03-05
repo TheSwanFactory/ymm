@@ -1,7 +1,9 @@
 0.2.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- History ^
+- keys.py
+- smarter debug log
 
 
 0.2.0 (2022-03-05)

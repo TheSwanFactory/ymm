@@ -12,12 +12,12 @@ class YMM:
         results = [self.execute(cmd) for cmd in actions]
         return results
 
-    def execute(cmd):
+    def execute(self, cmd):
         args = cmd.split(" ")
         self.log(args)
         result = subprocess.run(args, stdout=subprocess.PIPE)
         msg = result.stdout.decode("utf-8")
         return msg.strip()
 
-    def log(self,arg):
+    def log(self, arg):
         if self.debug: print(arg)

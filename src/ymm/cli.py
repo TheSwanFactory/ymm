@@ -36,7 +36,7 @@ def main():
     file = args.file
     ymm = load_file(file)
     ymm.env = context(args)
-    #if ymm.env['debug']: print(ymm.env)
+    if ymm.env['debug']: print(ymm.env['__version__'])
     actions = args.actions
     for action in actions:
         ymm.log(f'; {action}')

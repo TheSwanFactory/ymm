@@ -11,7 +11,8 @@ class YMM:
         return results
 
     def execute(self, cmd):
-        args = cmd.split(" ")
+        sub = cmd.format(**self.env)
+        args = sub.split(" ")
         self.log(args)
         result = subprocess.run(args, stdout=subprocess.PIPE)
         msg = result.stdout.decode("utf-8")

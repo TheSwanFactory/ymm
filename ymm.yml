@@ -16,7 +16,7 @@ test:
 
 echo:
     - echo Test Succesful
-    - echo {__version__}
+    - echo {__version__} > /tmp/echo.txt
 
 test-install:
     - python3 -m pip install -r requirements.txt
@@ -32,8 +32,8 @@ release:
     - postrelease --no-input
 
 dev:
-    - awk -Fv {printf("%sv%d\n",$1,v$2+1)} version.txt
-    - echo `!!` > version.txt
-    - git commit -am `cat version.txt`
+    - cat version.txt
+    - sed -i '' s/{__version__}/{__version_next__}/ version.txt
+    - git commit -am {__version_next__}
     #- git push
     - cat version.txt

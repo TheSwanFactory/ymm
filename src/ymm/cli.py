@@ -12,7 +12,7 @@ def main():
     file = args.file
     ymm = load_file(file)
     for action in actions:
-        print(action)
+        ymm.log(action)
         result = ymm.run(action)
         [print(r) for r in result]
 

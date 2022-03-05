@@ -6,7 +6,6 @@ FIRST_KEY='install'
 
 @pytest.fixture
 def y():
-    print(dir(ymm))
     return ymm.load_file(TEST_FILE)
 
 def test_load(y):

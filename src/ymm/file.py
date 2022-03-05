@@ -4,7 +4,6 @@ import os,shutil
 from .ymm import YMM
 
 def load_file(yaml_file=DEFAULT_FILE):
-    print(os.listdir('.'))
     print("Loading "+yaml_file)
     with open(yaml_file) as data:
         raw_yaml = yaml.full_load(data)

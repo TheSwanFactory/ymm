@@ -36,7 +36,8 @@ dev:
     - cat version.txt
     - echo old_version {__version__}
     - echo next_version {__version_next__}
-    - sed -i s/{__version__}/{__version_next__}/ version.txt
+    - sed -i new s/{__version__}/{__version_next__}/ version.txt
+    - mv version.txt.new version.txt
     - git commit -am {__version_next__}
     #- git push
     - cat version.txt

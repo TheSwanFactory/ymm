@@ -1,7 +1,5 @@
 import subprocess
 
-
-
 class YMM:
     def __init__(self, yaml, debug=True):
         self.yaml = yaml

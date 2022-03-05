@@ -16,9 +16,9 @@ test:
 watch:
     - pytest-watch
 release:
-    - prerelease
-    - release
+    - prerelease --no-input
+    - release --no-input
     - python3 -m build
     - python3 -m twine upload dist/*
-    - postrelease
+    - postrelease --no-input
 # - dev

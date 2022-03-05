@@ -2,6 +2,7 @@ import re
 import argparse
 import pkg_resources
 from pathlib import Path
+from .keys import *
 from .file import *
 
 __version__ = pkg_resources.require("ymm")[0].version
@@ -18,7 +19,7 @@ parser.add_argument('-v','--version', action='version',
 
 def add_versions(ctx):
     try:
-        local_version = Path('version.txt').read_text().strip()
+        local_version = Path(VERSION_FILE).read_text().strip()
     except e:
         print(e)
         return ctx
@@ -42,7 +43,6 @@ def main():
     file = args.file
     ymm = load_file(file)
     ymm.env = context(args)
-    if 'debug' in ymm.env: print(ymm.env['__version__'])
     actions = args.actions
     for action in actions:
         ymm.log(f'; {action}')

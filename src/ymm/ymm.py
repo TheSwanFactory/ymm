@@ -1,8 +1,6 @@
 import subprocess
-
-kCall='$'
-kLog='debug'
-kLast='^'
+import sys
+from .keys import *
 
 class YMM:
     def __init__(self, yaml, debug=True):
@@ -10,6 +8,7 @@ class YMM:
         self.env = {}
 
     def run(self,arg=False):
+        if not arg in self.yaml: sys.exit('ERROR: action [{arg}] not found')
         actions = self.yaml[arg]
         results = [self.execute(cmd) for cmd in actions]
         return results

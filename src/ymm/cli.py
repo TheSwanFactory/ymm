@@ -10,8 +10,7 @@ def main():
     args = parser.parse_args()
     actions = args.actions
     file = args.file
-    print(file)
-    ymm = load_file()
+    ymm = load_file(file)
     for action in actions:
         print(action)
         result = ymm.run(action)

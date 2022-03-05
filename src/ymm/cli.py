@@ -14,6 +14,6 @@ def main():
     for action in actions:
         print(action)
         result = ymm.run(action)
-        print(result)
+        [print(r) for r in result]
 
 #main()

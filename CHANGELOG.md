@@ -1,7 +1,13 @@
-0.1.1 (unreleased)
+0.2.1 (unreleased)
 ------------------
 
 - Nothing changed yet.
+
+
+0.2.0 (2022-03-05)
+------------------
+
+- Variable Substitution
 
 
 0.1.0 (2022-03-06)

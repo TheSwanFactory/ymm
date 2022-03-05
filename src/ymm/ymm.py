@@ -25,4 +25,4 @@ class YMM:
         return msg
 
     def log(self, arg):
-        if 'debug' in self.env: print(f'YMM.log {arg}')
+        if self.env.get(kLog, False): print(f'YMM.log {arg}')

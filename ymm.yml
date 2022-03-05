@@ -39,7 +39,7 @@ dev:
     - sed -i .new s/{__version__}/{__version_next__}/ version.txt
     - ls -lt
     - cat version.txt.new
-    - mv version.txt.new version.txt
+    #- mv version.txt.new version.txt
     - git commit -am {__version_next__}
     #- git push
     - cat version.txt

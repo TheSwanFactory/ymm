@@ -16,10 +16,11 @@ test:
 
 echo:
     - echo Test Succesful
-    - echo {__version__} > /tmp/echo.txt
+    - echo {__version__}
 
 test-install:
     - python3 -m pip install -r requirements.txt
+    - ymm -v
     - ymm -d echo
 
 watch:

@@ -14,7 +14,6 @@ build:
 test:
     - python3 -m pytest
 
-
 watch:
     - echo Use `ptw`
 

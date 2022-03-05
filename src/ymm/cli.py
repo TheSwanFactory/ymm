@@ -1,6 +1,7 @@
 import re
 import argparse
 import pkg_resources
+from pathlib import Path
 from .file import *
 
 __version__ = pkg_resources.require("ymm")[0].version
@@ -16,10 +17,15 @@ parser.add_argument('-v','--version', action='version',
                     version=f'%(prog)s {__version__}')
 
 def add_versions(ctx):
-    digits = re.findall(r'\d+', __version__)
+    try:
+        local_version = Path('version.txt').read_text()
+    except e:
+        print(e)
+        return ctx
+    digits = re.findall(r'\d+', local_version)
     last = int(digits[-1])
-    devNext = __version__.replace(f'dev{last}',f'dev{last+1}')
-    ctx['__version__'] = __version__
+    devNext = local_version.replace(f'dev{last}',f'dev{last+1}')
+    ctx['__version__'] = local_version
     ctx['__version_digits__'] = digits
     ctx['__version_next__'] = devNext
     return ctx
@@ -36,7 +42,7 @@ def main():
     file = args.file
     ymm = load_file(file)
     ymm.env = context(args)
-    if ymm.env['debug']: print(ymm.env['__version__'])
+    if 'debug' in ymm.env: print(ymm.env['__version__'])
     actions = args.actions
     for action in actions:
         ymm.log(f'; {action}')

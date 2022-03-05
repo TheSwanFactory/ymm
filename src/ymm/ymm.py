@@ -20,4 +20,4 @@ class YMM:
         return msg.strip()
 
     def log(self, arg):
-        if self.env['debug']: print(f'YMM.log {arg}')
+        if 'debug' in self.env: print(f'YMM.log {arg}')

@@ -3,7 +3,7 @@ import subprocess
 class YMM:
     def __init__(self, yaml, debug=True):
         self.yaml = yaml
-        self.debug = debug
+        self.env = {}
 
     def run(self,arg=False):
         actions = self.yaml[arg]
@@ -19,4 +19,4 @@ class YMM:
         return msg.strip()
 
     def log(self, arg):
-        if self.debug: print(f'YMM.log {arg}')
+        if self.env['debug']: print(f'YMM.log {arg}')

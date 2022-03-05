@@ -18,7 +18,7 @@ parser.add_argument('-v','--version', action='version',
 
 def add_versions(ctx):
     try:
-        local_version = Path('version.txt').read_text()
+        local_version = Path('version.txt').read_text().strip()
     except e:
         print(e)
         return ctx

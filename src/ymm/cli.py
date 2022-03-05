@@ -1,14 +1,20 @@
 import argparse
+from .file import *
 
-parser = argparse.ArgumentParser(description='Process some integers.')
-parser.add_argument('integers', metavar='N', type=int, nargs='+',
-                    help='an integer for the accumulator')
-parser.add_argument('--sum', dest='accumulate', action='store_const',
-                    const=sum, default=max,
-                    help='sum the integers (default: find the max)')
-
+parser = argparse.ArgumentParser(description='Run actions.')
+parser.add_argument('actions', metavar='action', nargs='+',
+                    help='actions from ymm.yaml to execute')
+parser.add_argument('-f','--file', default=DEFAULT_FILE,
+                    help='YAML file of actions')
 def main():
     args = parser.parse_args()
-    print(args.accumulate(args.integers))
+    actions = args.actions
+    file = args.file
+    print(file)
+    ymm = load_file()
+    for action in actions:
+        print(action)
+        result = ymm.run(action)
+        print(result)
 
-main()
+#main()

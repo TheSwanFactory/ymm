@@ -1,5 +1,9 @@
 import subprocess
 
+kCall='$'
+kLog='debug'
+kLast='^'
+
 class YMM:
     def __init__(self, yaml, debug=True):
         self.yaml = yaml
@@ -11,13 +15,15 @@ class YMM:
         return results
 
     def execute(self, cmd):
+        if cmd[0] == kCall: return "\n".join(self.run(cmd[1:]))
         sub = cmd.format(**self.env)
         args = sub.split(" ")
         self.log(args)
         result = subprocess.run(args, stdout=subprocess.PIPE)
-        msg = result.stdout.decode("utf-8")
+        msg = result.stdout.decode("utf-8").strip()
         print(f'# {msg}')
-        return msg.strip()
+        self.env[kLast]=msg
+        return msg
 
     def log(self, arg):
         if 'debug' in self.env: print(f'YMM.log {arg}')

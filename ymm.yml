@@ -14,6 +14,17 @@ build:
 test:
     - python3 -m pytest
 
+test-install:
+    - pip3 install -r requirements.txt
+    - ymm -v
+    - ymm -d echo
+
+echo:
+    - echo Test Successful
+    - date
+    - echo {^}
+    - $watch
+
 watch:
     - echo Use `ptw`
 

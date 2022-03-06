@@ -31,7 +31,7 @@ def main():
     ymm.env = context(args)
     actions = args.actions
     for action in actions:
-        ymm.log(f'; {action}')
+        print(f'; {action}')
         results = ymm.run(action)
 
 #main()

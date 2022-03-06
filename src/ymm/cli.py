@@ -17,22 +17,8 @@ parser.add_argument('-d','--debug', action='store_true',
 parser.add_argument('-v','--version', action='version',
                     version=f'%(prog)s {__version__}')
 
-def add_versions(ctx):
-    try:
-        local_version = Path(VERSION_FILE).read_text().strip()
-    except e:
-        print(e)
-        return ctx
-    digits = re.findall(r'\d+', local_version)
-    last = int(digits[-1])
-    devNext = local_version.replace(f'dev{last}',f'dev{last+1}')
-    ctx['__version__'] = local_version
-    ctx['__version_digits__'] = digits
-    ctx['__version_next__'] = devNext
-    return ctx
-
 def context(args):
-    ctx = add_versions(dict(os.environ))
+    ctx = dict(os.environ)
     for arg in vars(args):
         value = getattr(args, arg)
         ctx[arg] = getattr(args, arg)

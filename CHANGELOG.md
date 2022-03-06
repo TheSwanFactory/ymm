@@ -1,7 +1,7 @@
 0.4.0 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- kPrior
 
 
 0.3.0 (2022-03-05)

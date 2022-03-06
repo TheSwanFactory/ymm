@@ -21,6 +21,7 @@ class YMM:
         result = subprocess.run(args, stdout=subprocess.PIPE)
         msg = result.stdout.decode("utf-8").strip()
         print(f'# {msg}')
+        if kLast in self.env: self.env[kPrior] = self.env[kLast]
         self.env[kLast]=msg
         return msg
 

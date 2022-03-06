@@ -35,11 +35,16 @@ release:
     - python3 -m twine upload dist/*
     - postrelease --no-input
 
+version:
+    - cat version.txt
+    - awk -Fv {{printf("%sv%d\n",$1,$2+1)}} version.txt
+    - sed -i .new s/{^}/{^^}/ version.txt
+    - cat version.txt
+
 dev:
     - cat version.txt
-    - echo old_version {__version__}
-    - echo next_version {__version_next__}
-    - sed -i .new s/{__version__}/{__version_next__}/ version.txt
-    - git commit -am {__version_next__}
-    - git push
+    - awk -Fv {{printf("%sv%d\n",$1,$2+1)}} version.txt
+    - sed -i .new s/{^}/{^^}/ version.txt
     - cat version.txt
+    - git commit -am {^}
+    - git push

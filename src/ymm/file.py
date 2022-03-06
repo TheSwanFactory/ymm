@@ -1,6 +1,6 @@
-DEFAULT_FILE="./ymm.yml"
 import yaml
 import os,shutil
+from .keys import DEFAULT_FILE
 from .ymm import YMM
 
 def load_file(yaml_file=DEFAULT_FILE):

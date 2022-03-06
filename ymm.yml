@@ -14,6 +14,16 @@ build:
 test:
     - python3 -m pytest
 
+test-install:
+    - $install
+    - ymm -v
+    - ymm -d echo
+
+echo:
+    - echo Test Successful
+    - date
+    - echo {^}
+    - $watch
 
 watch:
     - echo Use `ptw`

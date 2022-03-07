@@ -14,6 +14,8 @@ parser.add_argument('-f','--file', default=DEFAULT_FILE,
                     help='YAML file of actions')
 parser.add_argument('-d','--debug', action='store_true',
                     help='print debugging information')
+parser.add_argument('-l','--list', action='store_true',
+                    help='list available actions')
 parser.add_argument('-v','--version', action='version',
                     version=f'%(prog)s {__version__}')
 
@@ -28,6 +30,9 @@ def main():
     args = parser.parse_args()
     file = args.file
     ymm = load_file(file)
+    if args.list:
+        print('actions:')
+        for action in ymm.actions(): print(f'    - {action}')
     ymm.env = context(args)
     actions = args.actions
     for action in actions:

@@ -8,32 +8,36 @@ class YMM:
         self.env = {}
         self.i = 0
 
-    def run(self,arg=False):
-        if not arg in self.yaml: sys.exit(f'ERROR: action [{arg}] not found')
-        actions = self.yaml[arg]
+    def actions(self):
+        return list(self.yaml.keys())
+
+    def run(self,action=False):
+        if not action in self.yaml: sys.exit(f'ERROR: action [{action}] not found')
+        commands = self.yaml[action]
+        self.action = action
         self.i = 0
-        self.arg = arg
-        results = [self.execute(cmd) for cmd in actions]
+        results = [self.execute(cmd) for cmd in commands]
         return results
 
     def execute(self, cmd):
         if cmd[0] == kCall: return "\n".join(self.run(cmd[1:]))
         sub = cmd.format(**self.env)
-        args = sub.split(" ")
-        self.log(args)
-        result = subprocess.run(args, stdout=subprocess.PIPE)
+        commands = sub.split(" ")
+        self.log(commands)
+        result = subprocess.run(commands, stdout=subprocess.PIPE)
         msg = result.stdout.decode("utf-8").strip()
         self.save(msg)
         return msg
 
     def save(self, msg):
-        print(f'# {msg}')
         self.i += 1
-        key = f'{self.arg}.{self.i}'
+        key = f'{self.action}#{self.i}'
+        print(f'  {key}: {msg}')
+
         if kLast in self.env: self.env[kPrior] = self.env[kLast]
         self.env[kLast]=msg
         self.env[key]=msg
         return msg
 
-    def log(self, arg):
-        if self.env.get(kLog, False): print(f'YMM.log {arg}')
+    def log(self, action):
+        if self.env.get(kLog, False): print(f'YMM.log {action}')

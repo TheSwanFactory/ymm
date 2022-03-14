@@ -1,7 +1,9 @@
 0.4.0 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- set variable if dictionary instead of list
+- parse as JSON if "{" first letter of output
+- set output key after subroutine call
 
 
 0.3.0 (2022-03-05)

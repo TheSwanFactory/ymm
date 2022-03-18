@@ -10,10 +10,14 @@ __version__ = pkg_resources.require("ymm")[0].version
 parser = argparse.ArgumentParser(description='Run actions.')
 parser.add_argument('actions', metavar='action', nargs='*',
                     help='actions from ymm.yaml to execute')
-parser.add_argument('-f','--file', default=DEFAULT_FILE,
-                    help='YAML file of actions')
 parser.add_argument('-d','--debug', action='store_true',
                     help='print debugging information')
+parser.add_argument('-f','--file', default=DEFAULT_FILE,
+                    help='YAML file of actions')
+parser.add_argument('-l','--lists', action='store_true',
+                    help='list available actions')
+parser.add_argument('-n','--no-init', action='store_true',
+                    help='skip init action')
 parser.add_argument('-v','--version', action='version',
                     version=f'%(prog)s {__version__}')
 

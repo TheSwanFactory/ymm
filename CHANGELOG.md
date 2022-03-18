@@ -1,9 +1,9 @@
-0.4.0 (unreleased)
+0.5.0 (unreleased)
 ------------------
 
-- set variable if dictionary instead of list
-- parse as JSON if "{" first letter of output
-- set output key after subroutine call
+- add JSON and Python eval
+- formalize execution syntax and semantics
+- nest output key on subroutine call
 
 
 0.3.0 (2022-03-05)

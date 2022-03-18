@@ -4,6 +4,7 @@
 - add JSON and Python eval
 - formalize execution syntax and semantics
 - nest output key on subroutine call
+- add builtin
 
 
 0.3.0 (2022-03-05)

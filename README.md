@@ -29,7 +29,7 @@ Variables cascade via the following rules
 ## Control Characters
 
 1. '.' run this YMM action
-2. '+' execute this Python string
+2. '+' execute this Python string (use '"""' for docstrings)
 3. '$' run this in the shell
 4. '^' pipe the prior result into this shell command
 5. '~' pipe the prior result into this jquery path

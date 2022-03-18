@@ -14,7 +14,7 @@ parser.add_argument('-d','--debug', action='store_true',
                     help='print debugging information')
 parser.add_argument('-f','--file', default=DEFAULT_FILE,
                     help='YAML file of actions')
-parser.add_argument('-l','--lists', action='store_true',
+parser.add_argument('-l','--list', action='store_true',
                     help='list available actions')
 parser.add_argument('-n','--no-init', action='store_true',
                     help='skip init action')
@@ -30,10 +30,14 @@ def context(args):
 
 def main():
     args = parser.parse_args()
-    file = args.file
-    ymm = load_file(file)
+    print(dir(args))
+    ymm = load_file(args.file)
+    if args.list:
+        for key in ymm.yaml:
+            print(f' - {key}')
     ymm.env = context(args)
     actions = args.actions
+    if not args.no_init: ymm.run(INIT_ACTION)
     for action in actions:
         ymm.log(f'; {action}')
         results = ymm.run(action)

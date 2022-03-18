@@ -22,7 +22,7 @@ parser.add_argument('-v','--version', action='version',
                     version=f'%(prog)s {__version__}')
 
 def context(args):
-    ctx = add_versions(dict(os.environ))
+    ctx = dict(os.environ)
     for arg in vars(args):
         value = getattr(args, arg)
         ctx[arg] = getattr(args, arg)
@@ -30,14 +30,14 @@ def context(args):
 
 def main():
     args = parser.parse_args()
-    print(dir(args))
+    #print(dir(args))
     ymm = load_file(args.file)
+    keys = list(ymm.yaml.keys())
     if args.list:
-        for key in ymm.yaml:
-            print(f' - {key}')
+        for key in keys: print(f' - {key}')
     ymm.env = context(args)
     actions = args.actions
-    if not args.no_init: ymm.run(INIT_ACTION)
+    if (not args.no_init) & (INIT_ACTION in keys) : ymm.run(INIT_ACTION)
     for action in actions:
         ymm.log(f'; {action}')
         results = ymm.run(action)

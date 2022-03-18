@@ -3,6 +3,9 @@
 # - watch
 # - release
 # - dev
+
+init:
+    - echo "Init"
 install:
     - pip3 install -r requirements.txt
 build:

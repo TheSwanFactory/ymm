@@ -7,8 +7,10 @@ class YMM:
         self.yaml = yaml
         self.env = {}
 
-    def run(self,arg=False):
-        if not arg in self.yaml: sys.exit('ERROR: action [{arg}] not found')
+    def run(self,arg=DEFAULT_ACTION):
+        if not arg in self.yaml:
+            msg = f'ERROR: action [{arg}] not found' if arg !=  else "Exiting"
+            sys.exit(msg)
         actions = self.yaml[arg]
         results = [self.execute(cmd) for cmd in actions]
         return results

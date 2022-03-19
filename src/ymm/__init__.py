@@ -4,5 +4,5 @@
 from .cli import exec
 from .file import *
 from .keys import *
-from .scope import Scope
 from .ymm import YMM
+from .scope import Scope

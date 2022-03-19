@@ -5,7 +5,13 @@ from importlib.metadata import version
 from pathlib import Path
 from .keys import *
 from .file import *
-from .scope import env
+
+def env(args):
+    ctx = dict(os.environ)
+    for arg in vars(args):
+        value = getattr(args, arg)
+        ctx[arg] = getattr(args, arg)
+    return ctx
 
 __version__ = version("ymm")
 

@@ -3,13 +3,6 @@ from .keys import *
 from .file import dict_file
 from importlib.resources import path
 
-def env(args):
-    ctx = dict(os.environ)
-    for arg in vars(args):
-        value = getattr(args, arg)
-        ctx[arg] = getattr(args, arg)
-    return ctx
-
 class Scope:
     def __init__(self):
         self.scopes = []

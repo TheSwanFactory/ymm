@@ -3,9 +3,9 @@ import sys
 from .keys import *
 
 class YMM:
-    def __init__(self, yaml, debug=True):
+    def __init__(self, yaml, env={}):
         self.yaml = yaml
-        self.env = {}
+        self.env = env
         self.i = 0
 
     def actions(self):

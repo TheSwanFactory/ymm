@@ -9,11 +9,11 @@ class Scope:
         bpath = path(MOD, BUILTIN_FILE)
         builtin = dict_file(bpath)
         env = dict(os.environ)
-        self.push(builtin, "builtin")
-        self.push(env, "env")
+        self.push(".builtin", builtin)
+        self.push(".env", env)
 
-    def push(self, ctx, name=None):
-        ctx[kID] = name if name else str(len(self.scopes))
+    def push(self, name, ctx = {}):
+        ctx[kID] = name
         self.scopes.append(ctx)
         return ctx
 

@@ -26,3 +26,8 @@ class Scope:
     def pop(self):
         ctx = self.scopes.pop()
         return ctx
+
+    def get(self, key):
+        for ctx in reversed(self.scopes):
+            if key in ctx: return ctx[key]
+        return None

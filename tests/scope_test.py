@@ -12,6 +12,5 @@ def test_scope(s):
     assert s
 
 def test_builtin(s):
-    #s.get()
-    print(dir(s))
-    assert s
+    r = s.get(FIRST_KEY)
+    assert "-r" in r[0]

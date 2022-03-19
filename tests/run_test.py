@@ -9,5 +9,8 @@ def y():
     return ymm.load_file(TEST_FILE)
 
 def test_run(y):
-    result = y.run(FIRST_KEY)
+    #print(dir(ymm))
+    args = Args(['install'])
+    result = ymm.exec(y,args)
+    #print(result)
     assert FIRST_KEY in result[0]

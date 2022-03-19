@@ -32,11 +32,12 @@ def exec(ymm, args):
     for action in actions:
         ymm.log(f'; {action}')
         results = ymm.run(action)
+    return results
 
 def main():
     args = parser.parse_args()
     #print(dir(args))
     ymm = load_file(args.file)
-    exec(ymm, args)
+    return exec(ymm, args)
 
 #main()

@@ -4,6 +4,7 @@ import pkg_resources
 from pathlib import Path
 from .keys import *
 from .file import *
+from .contxt import *
 
 __version__ = pkg_resources.require("ymm")[0].version
 
@@ -20,13 +21,6 @@ parser.add_argument('-n','--no-init', action='store_true',
                     help='skip init action')
 parser.add_argument('-v','--version', action='version',
                     version=f'%(prog)s {__version__}')
-
-def context(args):
-    ctx = dict(os.environ)
-    for arg in vars(args):
-        value = getattr(args, arg)
-        ctx[arg] = getattr(args, arg)
-    return ctx
 
 def main():
     args = parser.parse_args()

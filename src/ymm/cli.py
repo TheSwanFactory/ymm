@@ -5,7 +5,7 @@ from importlib.metadata import version
 from pathlib import Path
 from .keys import *
 from .file import *
-from .env import env
+from .scope import env
 
 __version__ = version("ymm")
 

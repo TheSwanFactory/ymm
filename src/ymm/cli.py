@@ -31,7 +31,7 @@ def exec(ymm, args):
     actions = args.actions
     if (not args.no_init) & (INIT_ACTION in keys): ymm.run(INIT_ACTION)
     for action in actions:
-        ymm.log(f'; {action}')
+        print(f'; {action}')
         results = ymm.run(action)
     return results
 

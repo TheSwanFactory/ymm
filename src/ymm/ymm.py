@@ -6,6 +6,10 @@ class YMM:
     def __init__(self, yaml, debug=True):
         self.yaml = yaml
         self.env = {}
+        self.i = 0
+
+    def actions(self):
+        return list(self.yaml.keys())
 
     def run(self,arg=DEFAULT_ACTION):
         if not arg in self.yaml:
@@ -18,13 +22,22 @@ class YMM:
     def execute(self, cmd):
         if cmd[0] == kCall: return "\n".join(self.run(cmd[1:]))
         sub = cmd.format(**self.env)
-        args = sub.split(" ")
-        self.log(args)
-        result = subprocess.run(args, stdout=subprocess.PIPE)
+        commands = sub.split(" ")
+        self.log(commands)
+        result = subprocess.run(commands, stdout=subprocess.PIPE)
         msg = result.stdout.decode("utf-8").strip()
-        print(f'# {msg}')
-        self.env[kLast]=msg
+        self.save(msg)
         return msg
 
-    def log(self, arg):
-        if self.env.get(kLog, False): print(f'YMM.log {arg}')
+    def save(self, msg):
+        self.i += 1
+        key = f'{self.action}#{self.i}'
+        print(f'  {key}: {msg}')
+
+        if kLast in self.env: self.env[kPrior] = self.env[kLast]
+        self.env[kLast]=msg
+        self.env[key]=msg
+        return msg
+
+    def log(self, action):
+        if self.env.get(kLog, False): print(f'YMM.log {action}')

@@ -7,6 +7,16 @@
 - add builtin
 
 
+0.4.0 (2022-03-07)
+------------------
+
+- kPrior
+- undo version hack
+- always echo action
+- store results
+- keyed output
+
+
 0.3.0 (2022-03-05)
 ------------------
 

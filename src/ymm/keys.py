@@ -2,6 +2,7 @@
 kCall='$'
 kLog='debug'
 kLast='^'
+kPrior='^^'
 
 INIT_ACTION='init'
 DEFAULT_ACTION='default'

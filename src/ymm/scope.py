@@ -12,6 +12,10 @@ class Scope:
         self.push(".builtin", builtin)
         self.push(".env", env)
 
+    def args(self, args):
+        ctx = {k: getattr(args, k) for k in vars(args)}
+        return self.push('.args', ctx)
+
     def push(self, name, ctx = {}):
         ctx[kID] = name
         self.scopes.append(ctx)

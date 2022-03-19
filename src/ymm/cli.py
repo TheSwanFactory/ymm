@@ -7,10 +7,6 @@ from .keys import *
 from .file import dict_file
 from .ymm import YMM
 
-def env(args):
-    ctx = {k: getattr(args, k) for k in vars(args)}
-    return ctx
-
 __version__ = version("ymm")
 
 parser = argparse.ArgumentParser(description='Run actions.')
@@ -27,18 +23,25 @@ parser.add_argument('-n','--no-init', action='store_true',
 parser.add_argument('-v','--version', action='version',
                     version=f'%(prog)s {__version__}')
 
-
 def load_file(yaml_file=DEFAULT_FILE):
     raw_yaml = dict_file(yaml_file)
     return YMM(raw_yaml)
 
+def list(keys, list_actions):
+    if list_actions:
+        for key in keys:
+            print(f' - {key}')
+
+def init(ymm, no_init, has_key):
+    if not no_init & has_key:
+        ymm.run(INIT_ACTION)
+
 def exec(ymm, args):
-    keys = list(ymm.yaml.keys())
-    if args.list:
-        for key in keys: print(f' - {key}')
-    ymm.env.push('.args', env(args))
+    ymm.env.args(args)
+    keys = ymm.actions()
+    list(keys, args.list)
+    init(ymm, args.no_init, INIT_ACTION in keys)
     actions = args.actions
-    if (not args.no_init) & (INIT_ACTION in keys): ymm.run(INIT_ACTION)
     for action in actions:
         print(f'; {action}')
         results = ymm.run(action)

@@ -8,7 +8,7 @@ def s():
     return ctx
 
 def test_scope(s):
-    print(dir(s))
+    #print(dir(s))
     assert s
 
 def test_builtin(s):

@@ -27,7 +27,7 @@ class Scope:
         ctx = self.scopes.pop()
         return ctx
 
-    def get(self, key):
+    def get(self, key, default=None):
         for ctx in reversed(self.scopes):
             if key in ctx: return ctx[key]
-        return None
+        return default

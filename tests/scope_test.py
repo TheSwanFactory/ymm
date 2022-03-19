@@ -22,3 +22,7 @@ def test_env(s):
 def test_non(s):
     r = s.get(42)
     assert not r
+
+def test_id(s):
+    r = s.get(ymm.kID)
+    assert "env" in r

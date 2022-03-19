@@ -32,3 +32,8 @@ class Scope:
         for ctx in reversed(self.scopes):
             if key in ctx: return ctx[key]
         return default
+
+    def set(self, key, value):
+        ctx = self.scopes[-1]
+        ctx[key] = value
+        return value

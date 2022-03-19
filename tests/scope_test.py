@@ -26,3 +26,8 @@ def test_non(s):
 def test_id(s):
     r = s.get(ymm.kID)
     assert "env" in r
+
+def test_set(s):
+    r = s.set(ymm.kLast, "last")
+    q = s.get(ymm.kLast)
+    assert "last" in q

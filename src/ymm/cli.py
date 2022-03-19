@@ -29,6 +29,11 @@ parser.add_argument('-n','--no-init', action='store_true',
 parser.add_argument('-v','--version', action='version',
                     version=f'%(prog)s {__version__}')
 
+
+def load_file(yaml_file=DEFAULT_FILE):
+    raw_yaml = dict_file(yaml_file)
+    return YMM(raw_yaml)
+
 def exec(ymm, args):
     keys = list(ymm.yaml.keys())
     if args.list:

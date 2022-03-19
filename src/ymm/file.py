@@ -12,7 +12,3 @@ def dict_file(yaml_file):
 def load_file(yaml_file=DEFAULT_FILE):
     raw_yaml = dict_file(yaml_file)
     return YMM(raw_yaml)
-
-def run_file(yaml_file=DEFAULT_FILE):
-    ymm = from_file(name, spark, folder)
-    return ymm.run()

@@ -14,3 +14,11 @@ def test_scope(s):
 def test_builtin(s):
     r = s.get(FIRST_KEY)
     assert "-r" in r[0]
+
+def test_env(s):
+    r = s.get("PATH")
+    assert "bin" in r
+
+def test_non(s):
+    r = s.get(42)
+    assert not r

@@ -1,6 +1,7 @@
 import subprocess
 import sys
 from .keys import *
+from .scope import Scope
 
 class YMM:
     def __init__(self, yaml, env={}):

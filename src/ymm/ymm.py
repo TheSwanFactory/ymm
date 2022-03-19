@@ -11,12 +11,14 @@ class YMM:
     def actions(self):
         return list(self.yaml.keys())
 
-    def run(self,arg=DEFAULT_ACTION):
-        if not arg in self.yaml:
-            msg = f'ERROR: action [{arg}] not found' if arg != DEFAULT_ACTION else "Exiting"
+    def run(self,action=DEFAULT_ACTION):
+        if not action in self.yaml:
+            msg = f'ERROR: action [{action}] not found' if action != DEFAULT_ACTION else "Exiting"
             sys.exit(msg)
-        actions = self.yaml[arg]
-        results = [self.execute(cmd) for cmd in actions]
+        commands = self.yaml[action]
+        self.action = action
+        self.i = 0
+        results = [self.execute(cmd) for cmd in commands]
         return results
 
     def execute(self, cmd):

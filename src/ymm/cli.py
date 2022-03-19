@@ -4,7 +4,7 @@ import pkg_resources
 from pathlib import Path
 from .keys import *
 from .file import *
-from .contxt import *
+from .context import *
 
 __version__ = pkg_resources.require("ymm")[0].version
 
@@ -22,10 +22,7 @@ parser.add_argument('-n','--no-init', action='store_true',
 parser.add_argument('-v','--version', action='version',
                     version=f'%(prog)s {__version__}')
 
-def main():
-    args = parser.parse_args()
-    #print(dir(args))
-    ymm = load_file(args.file)
+def exec(ymm, args):
     keys = list(ymm.yaml.keys())
     if args.list:
         for key in keys: print(f' - {key}')
@@ -35,5 +32,11 @@ def main():
     for action in actions:
         ymm.log(f'; {action}')
         results = ymm.run(action)
+
+def main():
+    args = parser.parse_args()
+    #print(dir(args))
+    ymm = load_file(args.file)
+    exec(ymm, args)
 
 #main()

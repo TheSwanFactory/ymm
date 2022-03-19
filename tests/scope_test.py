@@ -31,3 +31,7 @@ def test_set(s):
     r = s.set(ymm.kLast, "last")
     q = s.get(ymm.kLast)
     assert "last" in q
+
+def test_flat(s):
+    ctx = s.flat()
+    assert "env" in ctx[ymm.kID]

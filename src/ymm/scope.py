@@ -30,3 +30,7 @@ class Scope:
         ctx = self.scopes[-1]
         ctx[key] = value
         return value
+
+    def flat(self):
+        ctx = {k: v for d in self.scopes for k, v in d.items()}
+        return ctx

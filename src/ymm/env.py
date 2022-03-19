@@ -1,7 +1,7 @@
 import os
 from .keys import *
 
-def context(args):
+def env(args):
     ctx = dict(os.environ)
     for arg in vars(args):
         value = getattr(args, arg)

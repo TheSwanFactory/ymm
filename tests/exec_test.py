@@ -8,7 +8,7 @@ FIRST_KEY='install'
 def y():
     return ymm.load_file(TEST_FILE)
 
-def test_run(y):
+def test_exec(y):
     #print(dir(ymm))
     args = Args(['install'])
     result = ymm.exec(y,args)

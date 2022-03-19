@@ -4,7 +4,7 @@ import pkg_resources
 from pathlib import Path
 from .keys import *
 from .file import *
-from .context import *
+from .env import env
 
 __version__ = pkg_resources.require("ymm")[0].version
 
@@ -26,7 +26,7 @@ def exec(ymm, args):
     keys = list(ymm.yaml.keys())
     if args.list:
         for key in keys: print(f' - {key}')
-    ymm.env = context(args)
+    ymm.env = env(args)
     actions = args.actions
     if (not args.no_init) & (INIT_ACTION in keys) : ymm.run(INIT_ACTION)
     for action in actions:

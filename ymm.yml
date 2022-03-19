@@ -29,7 +29,7 @@ echo:
     - $watch
 
 watch:
-    - echo Use `ptw`
+    - echo Use `ptw --onpass "say passed" --onfail "say failed"`
 
 release:
     - prerelease --no-input

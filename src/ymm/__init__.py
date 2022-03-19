@@ -4,3 +4,4 @@
 from .ymm import YMM
 from .file import *
 from .cli import exec
+from .scope import Scope

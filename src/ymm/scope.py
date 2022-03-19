@@ -2,7 +2,6 @@ import os
 from .keys import *
 from .file import dict_file
 from importlib.resources import path
-MOD="ymm"
 
 def env(args):
     ctx = dict(os.environ)

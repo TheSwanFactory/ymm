@@ -2,8 +2,6 @@
 import pytest
 from .context import *
 
-FIRST_KEY='install'
-
 @pytest.fixture
 def y():
     return ymm.load_file(TEST_FILE)

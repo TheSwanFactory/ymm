@@ -10,3 +10,8 @@ def s():
 def test_scope(s):
     print(dir(s))
     assert s
+
+def test_builtin(s):
+    #s.get()
+    print(dir(s))
+    assert s

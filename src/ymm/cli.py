@@ -1,16 +1,17 @@
 import re
 import argparse
-import pkg_resources
+#import pkg_resources
+from importlib.metadata import version
 from pathlib import Path
 from .keys import *
 from .file import *
 from .env import env
 
-__version__ = pkg_resources.require("ymm")[0].version
+__version__ = version("ymm")
 
 parser = argparse.ArgumentParser(description='Run actions.')
 parser.add_argument('actions', metavar='action', nargs='*',default=DEFAULT_ACTION,
-                    help='actions from ymm.yaml to execute')
+                    help='actions from <file> to execute')
 parser.add_argument('-d','--debug', action='store_true',
                     help='print debugging information')
 parser.add_argument('-f','--file', default=DEFAULT_FILE,
@@ -28,7 +29,7 @@ def exec(ymm, args):
         for key in keys: print(f' - {key}')
     ymm.env = env(args)
     actions = args.actions
-    if (not args.no_init) & (INIT_ACTION in keys) : ymm.run(INIT_ACTION)
+    if (not args.no_init) & (INIT_ACTION in keys): ymm.run(INIT_ACTION)
     for action in actions:
         ymm.log(f'; {action}')
         results = ymm.run(action)

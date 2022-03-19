@@ -1,5 +1,6 @@
 import os
 from .keys import *
+from importlib.resources import read_text
 
 def env(args):
     ctx = dict(os.environ)

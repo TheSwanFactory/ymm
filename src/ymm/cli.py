@@ -8,10 +8,7 @@ from .file import dict_file
 from .ymm import YMM
 
 def env(args):
-    ctx = dict(os.environ)
-    for arg in vars(args):
-        value = getattr(args, arg)
-        ctx[arg] = getattr(args, arg)
+    ctx = {k: getattr(args, k) for k in vars(args)}
     return ctx
 
 __version__ = version("ymm")
@@ -39,7 +36,7 @@ def exec(ymm, args):
     keys = list(ymm.yaml.keys())
     if args.list:
         for key in keys: print(f' - {key}')
-    ymm.env = env(args)
+    ymm.env.push('.args', env(args))
     actions = args.actions
     if (not args.no_init) & (INIT_ACTION in keys): ymm.run(INIT_ACTION)
     for action in actions:

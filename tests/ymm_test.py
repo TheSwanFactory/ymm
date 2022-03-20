@@ -17,3 +17,9 @@ def test_run(y):
     key = f'{FIRST_KEY}#0'
     value = y.env.get(key)
     assert value
+
+def test_dict(y):
+    result = y.run("env")
+    assert "value" in result[0]
+    value = y.env.get("key")
+    assert value

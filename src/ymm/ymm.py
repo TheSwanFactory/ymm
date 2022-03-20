@@ -3,6 +3,8 @@ import sys
 from .keys import *
 from .scope import Scope
 
+def is_dict(d): return type(d) is dict
+
 class YMM:
     def __init__(self, yaml):
         self.yaml = yaml
@@ -18,10 +20,11 @@ class YMM:
             sys.exit(msg)
         self.env.push(action)
         commands = self.yaml[action]
-        results = [self.execute(cmd, f'{action}#{i}') for i,cmd in enumerate(commands)]
+        results = [self.execute(v, k) for k,v in commands.items()] if is_dict(commands) else [self.execute(cmd, f'{action}#{i}') for i,cmd in enumerate(commands)]
         return results
 
     def execute(self, cmd, key):
+        #print(f'** {key}: {cmd}')
         if cmd[0] == kCall: return "\n".join(self.run(cmd[1:]))
         sub = cmd.format(**self.env.flat())
         commands = sub.split(" ")

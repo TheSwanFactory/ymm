@@ -8,3 +8,6 @@ init:
 
 install:
     - echo "install test"
+
+env:
+  key: echo "value"

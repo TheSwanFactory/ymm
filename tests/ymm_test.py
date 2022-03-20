@@ -14,3 +14,6 @@ def test_load(y):
 def test_run(y):
     result = y.run(FIRST_KEY)
     assert FIRST_KEY in result[0]
+    key = f'{FIRST_KEY}#0'
+    value = y.env.get(key)
+    assert value

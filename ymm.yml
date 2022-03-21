@@ -6,16 +6,12 @@
 
 init:
     - echo "Init"
-install:
-    - pip3 install -r requirements.txt
+
 build:
     - pip3 install --upgrade pytest
     - pip3 install --upgrade pytest-watch
     - pip3 install --upgrade build
     - pip3 install --upgrade twine
-
-test:
-    - python3 -m pytest
 
 test-install:
     - $install
@@ -27,9 +23,6 @@ echo:
     - date -u +"%Y-%m-%dT%H:%M:%SZ"
     - echo last={^}
     - echo echo#2={echo#2}
-
-watch:
-    - echo Use `ptw --onpass "say passed" --onfail "say failed"`
 
 release:
     - prerelease --no-input

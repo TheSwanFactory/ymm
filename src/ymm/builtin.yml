@@ -6,6 +6,7 @@
 
 install:
     - pip3 install -r requirements.txt
+    - ymm --version
 
 test:
     - python3 -m pytest

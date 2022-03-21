@@ -33,12 +33,15 @@ def list(keys, list_actions):
             print(f' - {key}')
 
 def init(ymm, no_init, has_key):
+    ymm.log(f'no_init:{no_init} has_key:{has_key}', "init")
     if (not no_init) & has_key:
         ymm.run(INIT_ACTION)
 
 def exec(ymm, args):
+    ymm.log(args, "args")
     ymm.env.args(args)
     keys = ymm.actions
+    ymm.log(keys, "keys")
     list(keys, args.list)
     init(ymm, args.no_init, INIT_ACTION in keys)
     actions = args.actions
@@ -51,6 +54,6 @@ def main():
     args = parser.parse_args()
     #print(dir(args))
     ymm = load_file(args.file)
-    return exec(ymm, args)
-
+    exec(ymm, args)
+    return 0
 #main()

@@ -21,25 +21,25 @@ class YMM:
         return results
 
     def execute(self, cmd, key):
-        print(f'** {key}: {cmd}')
-        if isinstance(cmd,str):
-            if cmd[0] == kCall: return "\n".join(self.run(cmd[1:]))
-            sub = cmd.format(**self.env.flat())
-            commands = sub.split(" ")
-            self.log(commands)
-            result = subprocess.run(commands, stdout=subprocess.PIPE)
-            msg = result.stdout.decode("utf-8").strip()
-        else:
-            msg = cmd
-        self.save(msg, key)
+        self.log(f'! {key}: {cmd}', "execute")
+        if not isinstance(cmd,str): return self.save(cmd, key)
+        if cmd[0] == kCall: return "\n".join(self.run(cmd[1:]))
+        sub = cmd.format(**self.env.flat())
+        commands = sub.split(" ")
+        self.log(commands, "commands")
+        result = subprocess.run(commands, stdout=subprocess.PIPE)
+        msg = result.stdout.decode("utf-8").strip()
+        if isinstance(msg,str): return self.save(msg, key)
         return msg
 
     def save(self, msg, key):
-        print(f'  {key}: {msg}')
+        self.log(f'# {key}: {msg}', "save")
         #if kLast in self.env: self.env[kPrior] = self.env[kLast]
         self.env.set(kLast, msg)
         self.env.set(key, msg)
         return msg
 
-    def log(self, action):
-        if self.env.get(kLog, False): print(f'YMM.log {action}')
+    def log(self, action, caption=False):
+        if self.env.get(kLog, False):
+            if caption: print(f'DEBUG_{caption}')
+            print(f'DEBUG {action}')

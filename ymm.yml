@@ -5,8 +5,9 @@
 # - dev
 
 init:
-    echo: echo "Init"
+    message: echo "Init"
     version: cat version.txt
+    debug: true
 
 build:
     - pip3 install --upgrade pytest
@@ -20,7 +21,6 @@ test-install:
     - ymm -d echo
 
 echo:
-    success: echo Test Successful
     date: date -u +"%Y-%m-%dT%H:%M:%SZ"
     echo_date: echo {date}
 
@@ -34,6 +34,10 @@ release:
 bump-dev:
    new: awk -Fv {{printf("%sv%d\n",$1,$2+1)}} version.txt
    update: sed -i .prev s/{version}/{new}/ version.txt
+
+reinstall:
+    - $bump-dev
+    - $test-install
 
 dev:
     - $bump-dev

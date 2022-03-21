@@ -3,12 +3,12 @@ import sys
 from .keys import *
 from .scope import Scope
 
-def is_dict(d): return type(d) is dict
+def is_dict(d): return isinstance(d, dict)
 
 class YMM:
     def __init__(self, yaml):
         self.env = Scope()
-        self.env.push("file", yaml)
+        self.env.push("ymm", yaml)
         self.actions = self.env.actions()
 
     def run(self,action=DEFAULT_ACTION):
@@ -21,7 +21,7 @@ class YMM:
         return results
 
     def execute(self, cmd, key):
-        #print(f'** {key}: {cmd}')
+        print(f'** {key}: {cmd}')
         if cmd[0] == kCall: return "\n".join(self.run(cmd[1:]))
         sub = cmd.format(**self.env.flat())
         commands = sub.split(" ")

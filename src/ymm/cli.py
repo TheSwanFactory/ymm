@@ -33,7 +33,7 @@ def list(keys, list_actions):
             print(f' - {key}')
 
 def init(ymm, no_init, has_key):
-    if not no_init & has_key:
+    if (not no_init) & has_key:
         ymm.run(INIT_ACTION)
 
 def exec(ymm, args):

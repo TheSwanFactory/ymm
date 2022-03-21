@@ -5,7 +5,7 @@
 # - dev
 
 init:
-    - echo "Init"
+    echo: echo "Init"
 
 build:
     - pip3 install --upgrade pytest

@@ -22,12 +22,15 @@ class YMM:
 
     def execute(self, cmd, key):
         print(f'** {key}: {cmd}')
-        if cmd[0] == kCall: return "\n".join(self.run(cmd[1:]))
-        sub = cmd.format(**self.env.flat())
-        commands = sub.split(" ")
-        self.log(commands)
-        result = subprocess.run(commands, stdout=subprocess.PIPE)
-        msg = result.stdout.decode("utf-8").strip()
+        if isinstance(cmd,str):
+            if cmd[0] == kCall: return "\n".join(self.run(cmd[1:]))
+            sub = cmd.format(**self.env.flat())
+            commands = sub.split(" ")
+            self.log(commands)
+            result = subprocess.run(commands, stdout=subprocess.PIPE)
+            msg = result.stdout.decode("utf-8").strip()
+        else:
+            msg = cmd
         self.save(msg, key)
         return msg
 

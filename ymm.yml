@@ -6,6 +6,7 @@
 
 init:
     echo: echo "Init"
+    version: cat version.txt
 
 build:
     - pip3 install --upgrade pytest
@@ -19,10 +20,9 @@ test-install:
     - ymm -d echo
 
 echo:
-    - echo Test Successful
-    - date -u +"%Y-%m-%dT%H:%M:%SZ"
-    - echo last={^}
-    - echo echo#2={echo#2}
+    success: echo Test Successful
+    date: date -u +"%Y-%m-%dT%H:%M:%SZ"
+    echo_date: echo {date}
 
 release:
     - prerelease --no-input
@@ -32,12 +32,10 @@ release:
     - postrelease --no-input
 
 bump-dev:
-    - cat version.txt
-    - awk -Fv {{printf("%sv%d\n",$1,$2+1)}} version.txt
-    - sed -i .prev s/{^^}/{^}/ version.txt
+   new: awk -Fv {{printf("%sv%d\n",$1,$2+1)}} version.txt
+   update: sed -i .prev s/{version}/{new}/ version.txt
 
 dev:
     - $bump-dev
-    - cat version.txt
-    - git commit -am {^}
+    - git commit -am {version}
     - git push

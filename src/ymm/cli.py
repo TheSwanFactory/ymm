@@ -38,7 +38,7 @@ def init(ymm, no_init, has_key):
 
 def exec(ymm, args):
     ymm.env.args(args)
-    keys = ymm.actions()
+    keys = ymm.actions
     list(keys, args.list)
     init(ymm, args.no_init, INIT_ACTION in keys)
     actions = args.actions

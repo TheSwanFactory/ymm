@@ -7,19 +7,16 @@ def is_dict(d): return type(d) is dict
 
 class YMM:
     def __init__(self, yaml):
-        self.yaml = yaml
         self.env = Scope()
-        self.i = 0
-
-    def actions(self):
-        return list(self.yaml.keys())
+        self.env.push("file", yaml)
+        self.actions = self.env.actions()
 
     def run(self,action=DEFAULT_ACTION):
-        if not action in self.yaml:
+        if not action in self.actions:
             msg = f'ERROR: action [{action}] not found' if action != DEFAULT_ACTION else "Exiting"
             sys.exit(msg)
         self.env.push(action)
-        commands = self.yaml[action]
+        commands = self.env.get(action)
         results = [self.execute(v, k) for k,v in commands.items()] if is_dict(commands) else [self.execute(cmd, f'{action}#{i}') for i,cmd in enumerate(commands)]
         return results
 

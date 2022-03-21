@@ -8,8 +8,8 @@ def y():
 
 def test_load(y):
     assert y
-    assert y.yaml
-    assert y.yaml[FIRST_KEY]
+    assert y.env
+    assert y.env.get(FIRST_KEY)
 
 def test_run(y):
     result = y.run(FIRST_KEY)

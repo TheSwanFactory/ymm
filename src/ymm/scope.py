@@ -38,3 +38,8 @@ class Scope:
     def flat(self):
         ctx = {k: v for d in self.scopes for k, v in d.items()}
         return ctx
+
+    def actions(self):
+        keys = list(self.flat().keys())
+        actions = [k for k in keys if isinstance(k, str)]
+        return actions

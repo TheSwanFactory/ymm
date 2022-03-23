@@ -7,6 +7,7 @@
 init:
     MSG: echo "Init"
     VERSION: cat version.txt
+    DATE: date -u +"%Y-%m-%dT%H:%M:%SZ"
 
 build:
     - pip3 install --upgrade pytest
@@ -17,11 +18,10 @@ build:
 test-install:
     - $install
     - ymm -v
-    - ymm -d echo
+    - ymm echo
 
 echo:
     SELF: echo "echo"
-    DATE: date -u +"%Y-%m-%dT%H:%M:%SZ"
     ECHO: echo {DATE}
 
 release:
@@ -41,5 +41,5 @@ reinstall:
 
 dev:
     - $bump-dev
-    - git commit -am {version}
+    - git commit -am {VERSION}
     - git push

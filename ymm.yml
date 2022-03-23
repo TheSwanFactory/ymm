@@ -5,7 +5,6 @@
 # - dev
 
 init:
-    MSG: echo "Init"
     VERSION: cat version.txt
     DATE: date -u +"%Y-%m-%dT%H:%M:%SZ"
 

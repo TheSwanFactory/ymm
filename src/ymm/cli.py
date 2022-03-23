@@ -34,7 +34,7 @@ def load_file(yaml_file=DEFAULT_FILE):
     raw_yaml = dict_file(yaml_file)
     return YMM(raw_yaml)
 
-def print_list(keys, list_actions):
+def print_actions(keys, list_actions):
     if list_actions:
         for key in keys:
             print(f' - {key}')
@@ -49,7 +49,7 @@ def exec(ymm, args):
     ymm.env.args(args)
     keys = ymm.actions
     ymm.log(keys, "keys")
-    print_list(keys, args.list)
+    print_actions(keys, args.list)
     init(ymm, args.no_init, INIT_ACTION in keys)
     actions = args.actions
     results=[]

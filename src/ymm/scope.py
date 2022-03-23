@@ -40,6 +40,6 @@ class Scope:
         return ctx
 
     def actions(self):
-        keys = list(self.flat().keys())
-        actions = [k for k in keys if isinstance(k, str)]
+        dict = self.flat();
+        actions = [k for k,v in dict.items() if not isinstance(v, str)]
         return actions

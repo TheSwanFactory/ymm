@@ -11,6 +11,12 @@ def test_load(y):
     assert y.env
     assert y.env.get(FIRST_KEY)
 
+def test_actions(y):
+    a = y.env.actions()
+    assert a
+    assert FIRST_KEY in a
+    assert "PATH" not in a
+
 def test_run(y):
     result = y.run(FIRST_KEY)
     assert FIRST_KEY in result[0]

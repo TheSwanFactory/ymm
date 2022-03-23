@@ -22,7 +22,7 @@ test-install:
 echo:
     SELF: echo "echo"
     DATE: date -u +"%Y-%m-%dT%H:%M:%SZ"
-    ECHO: echo {date}
+    ECHO: echo {DATE}
 
 release:
     - prerelease --no-input

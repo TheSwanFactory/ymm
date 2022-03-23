@@ -10,7 +10,7 @@ from .ymm import YMM
 __version__ = version("ymm")
 
 parser = argparse.ArgumentParser(description='Run actions.')
-parser.add_argument('actions', metavar='action', nargs='*',default=DEFAULT_ACTION,
+parser.add_argument('actions', metavar='action', nargs='*',
                     help='actions from <file> to execute')
 parser.add_argument('-d','--debug', action='store_true',
                     help='print debugging information')
@@ -23,11 +23,18 @@ parser.add_argument('-n','--no-init', action='store_true',
 parser.add_argument('-v','--version', action='version',
                     version=f'%(prog)s {__version__}')
 
+def flatten(list_of_lists):
+    if len(list_of_lists) == 0:
+        return list_of_lists
+    if isinstance(list_of_lists[0], list):
+        return flatten(list_of_lists[0]) + flatten(list_of_lists[1:])
+    return list_of_lists[:1] + flatten(list_of_lists[1:])
+
 def load_file(yaml_file=DEFAULT_FILE):
     raw_yaml = dict_file(yaml_file)
     return YMM(raw_yaml)
 
-def list(keys, list_actions):
+def print_list(keys, list_actions):
     if list_actions:
         for key in keys:
             print(f' - {key}')
@@ -42,13 +49,14 @@ def exec(ymm, args):
     ymm.env.args(args)
     keys = ymm.actions
     ymm.log(keys, "keys")
-    list(keys, args.list)
+    print_list(keys, args.list)
     init(ymm, args.no_init, INIT_ACTION in keys)
     actions = args.actions
+    results=[]
     for action in actions:
         print(f'; {action}')
-        results = ymm.run(action)
-    return results
+        results.append(ymm.run(action))
+    return flatten(results)
 
 def main():
     args = parser.parse_args()

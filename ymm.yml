@@ -33,7 +33,7 @@ release:
 
 bump-dev:
    NEW: awk -Fv {{printf("%sv%d\n",$1,$2+1)}} version.txt
-   UPDATED: sed -i .prev s/{version}/{new}/ version.txt
+   UPDATED: sed -i .prev s/{VERSION}/{NEW}/ version.txt
 
 reinstall:
     - $bump-dev

@@ -29,7 +29,7 @@ class YMM:
         self.log(commands, "commands")
         result = subprocess.run(commands, stdout=subprocess.PIPE)
         msg = result.stdout.decode("utf-8").strip()
-        if isinstance(msg,str): return self.save(msg, key)
+        if msg and isinstance(msg,str): return self.save(msg, key)
         return msg
 
     def save(self, msg, key):

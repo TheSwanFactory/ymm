@@ -33,7 +33,7 @@ class YMM:
         return msg
 
     def save(self, msg, key):
-        self.log(f'# {key}: {msg}', "save")
+        print(f'# {key}: {msg}')
         #if kLast in self.env: self.env[kPrior] = self.env[kLast]
         self.env.set(kLast, msg)
         self.env.set(key, msg)

@@ -1,4 +1,4 @@
-0.5.0 (unreleased)
+0.5.0 (2022-03-23)
 ------------------
 
 - add JSON and Python eval

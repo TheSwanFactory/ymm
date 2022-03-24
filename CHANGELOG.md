@@ -1,7 +1,8 @@
-0.5.1 (unreleased)
+0.6.0 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Control characters
+- -s for silent (always for init)
 
 
 0.5.0 (2022-03-23)

@@ -1,7 +1,16 @@
-0.4.1 (unreleased)
+0.5.1 (unreleased)
 ------------------
 
 - Nothing changed yet.
+
+
+0.5.0 (2022-03-23)
+------------------
+
+- add JSON and Python eval
+- formalize execution syntax and semantics
+- nest output key on subroutine call
+- add builtin
 
 
 0.4.0 (2022-03-07)

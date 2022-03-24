@@ -3,30 +3,25 @@
 # - watch
 # - release
 # - dev
-install:
-    - pip3 install -r requirements.txt
+
+init:
+    VERSION: cat version.txt
+    DATE: date -u +"%Y-%m-%dT%H:%M:%SZ"
+
 build:
     - pip3 install --upgrade pytest
     - pip3 install --upgrade pytest-watch
     - pip3 install --upgrade build
     - pip3 install --upgrade twine
 
-test:
-    - python3 -m pytest
-
 test-install:
     - $install
     - ymm -v
-    - ymm -d echo
+    - ymm echo
 
 echo:
-    - echo Test Successful
-    - date -u +"%Y-%m-%dT%H:%M:%SZ"
-    - echo last={^}
-    - echo echo#2={echo#2}
-
-watch:
-    - echo Use `ptw`
+    SELF: echo "echo"
+    ECHO: echo {DATE}
 
 release:
     - prerelease --no-input
@@ -36,12 +31,14 @@ release:
     - postrelease --no-input
 
 bump-dev:
-    - cat version.txt
-    - awk -Fv {{printf("%sv%d\n",$1,$2+1)}} version.txt
-    - sed -i .prev s/{^^}/{^}/ version.txt
+   NEW: awk -Fv {{printf("%sv%d\n",$1,$2+1)}} version.txt
+   UPDATED: sed -i .prev s/{VERSION}/{NEW}/ version.txt
+
+reinstall:
+    - $bump-dev
+    - $test-install
 
 dev:
     - $bump-dev
-    - cat version.txt
-    - git commit -am {^}
+    - git commit -am {VERSION}
     - git push

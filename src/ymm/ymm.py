@@ -24,7 +24,7 @@ class YMM:
         self.log(f'! {key}: {cmd}', "execute")
         if not isinstance(cmd,str): return self.save(cmd, key)
         if cmd[0] == kCall: return "\n".join(self.run(cmd[1:]))
-        sub = cmd.format(**self.env.flat())
+        sub = cmd.format(**self.env.flatstr())
         commands = sub.split(" ")
         self.log(commands, "commands")
         result = subprocess.run(commands, stdout=subprocess.PIPE)

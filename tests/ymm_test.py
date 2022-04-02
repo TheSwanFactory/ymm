@@ -27,5 +27,5 @@ def test_run(y):
 def test_dict(y):
     result = y.run("env")
     assert "value" in result[0]
-    value = y.env.get("key")
+    value = y.env.get("KEY")
     assert value

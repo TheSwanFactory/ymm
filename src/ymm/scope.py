@@ -1,4 +1,5 @@
 import os
+import json
 from .keys import *
 from .file import dict_file
 from importlib.resources import path
@@ -36,10 +37,18 @@ class Scope:
         return value
 
     def flat(self):
-        ctx = {k: v for d in self.scopes for k, v in d.items()}
-        return ctx
+        values = {k: v for d in self.scopes for k, v in d.items()}
+        return values
+
+    def flatstr(self):
+        jvals = {k: fixup(v) for k, v in self.flat().items()}
+        return jvals
 
     def actions(self):
         dict = self.flat();
         actions = [k for k,v in dict.items() if not isinstance(v, str)]
         return actions
+
+def fixup(v):
+    s = json.dumps(v)
+    return s.replace(': ',':')

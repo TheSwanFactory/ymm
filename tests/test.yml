@@ -10,4 +10,7 @@ install:
     - echo "install test"
 
 env:
-  key: echo "value"
+  KEY: echo "value"
+  DICT:
+    A: B
+    C: D

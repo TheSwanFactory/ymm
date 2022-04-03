@@ -41,14 +41,18 @@ class Scope:
         return values
 
     def flatstr(self):
-        jvals = {k: fixup(v) for k, v in self.flat().items()}
-        return jvals
+        jvalues = {k: fixup(v) for d in self.scopes for k, v in d.items()}
+        return jvalues
 
     def actions(self):
         dict = self.flat();
         actions = [k for k,v in dict.items() if not isinstance(v, str)]
         return actions
 
-def fixup(v):
-    s = json.dumps(v)
-    return s.replace(': ',':')
+def closeup(v):
+    return json.dumps(v).replace(': ',':').replace(', ', ',')
+
+def fixup(data):
+    if not isinstance(data, dict): return data
+    print(f'fixup: {data}')
+    return closeup(data)

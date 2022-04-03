@@ -54,5 +54,4 @@ def closeup(v):
 
 def fixup(data):
     if not isinstance(data, dict): return data
-    print(f'fixup: {data}')
     return closeup(data)

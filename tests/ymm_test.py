@@ -27,12 +27,9 @@ def test_run(y):
 def test_dict(y):
     ri = y.run("init")
     variables = y.env.flatstr()
-    print(variables)
     d = variables["DICT"]
-    print(d)
     assert ':"' in d
 
     result = y.run("echo")
     assert ':"' in result[0]
     jval = y.env.get("RESULT")
-    print(f'[{jval}]')

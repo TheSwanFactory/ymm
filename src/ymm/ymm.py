@@ -13,6 +13,7 @@ class YMM:
         self.printOutput = True
 
     def run(self,action=DEFAULT_ACTION, hide=True):
+        currentOutput = self.printOutput
         if hide: self.printOutput = False
         if not action in self.actions:
             msg = f'ERROR: action [{action}] not found' if action != DEFAULT_ACTION else "Exiting"
@@ -20,7 +21,7 @@ class YMM:
         self.env.push(action)
         commands = self.env.get(action)
         results = [self.execute(v, k) for k,v in commands.items()] if is_dict(commands) else [self.execute(cmd, f'{action}#{i}') for i,cmd in enumerate(commands)]
-        if hide: self.printOutput = True
+        if hide: self.printOutput = currentOutput
         return results
 
     def execute(self, cmd, key):

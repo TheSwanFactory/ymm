@@ -2,6 +2,7 @@
 ------------------
 
 - Control characters
+- condense dicts
 - -s for silent (always for init)
 
 

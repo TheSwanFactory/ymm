@@ -20,6 +20,8 @@ parser.add_argument('-l','--list', action='store_true',
                     help='list available actions')
 parser.add_argument('-n','--no-init', action='store_true',
                     help='skip init action')
+parser.add_argument('-s','--silent', action='store_true',
+                    help='silence outputs')
 parser.add_argument('-v','--version', action='version',
                     version=f'%(prog)s {__version__}')
 
@@ -62,6 +64,7 @@ def main():
     args = parser.parse_args()
     #print(dir(args))
     ymm = load_file(args.file)
+    if args.silent: ymm.printOutput = False
     exec(ymm, args)
     return 0
 #main()

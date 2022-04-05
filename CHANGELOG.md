@@ -1,7 +1,7 @@
 0.6.0 (unreleased)
 ------------------
 
-- Control characters
+- TODO: Control characters
 - condense dicts
 - -s for silent (always for init)
 

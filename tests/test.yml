@@ -4,10 +4,13 @@
 # - release
 # - dev
 init:
-    - echo "install test"
+  KEY: echo "value"
+  DICT:
+    A: B
+    C: D
 
 install:
     - echo "install test"
 
-env:
-  key: echo "value"
+echo:
+    RESULT: echo {DICT}

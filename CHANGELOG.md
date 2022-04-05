@@ -1,7 +1,15 @@
-0.5.1 (unreleased)
+0.6.1 (unreleased)
 ------------------
 
 - Nothing changed yet.
+
+
+0.6.0 (2022-04-05)
+------------------
+
+- TODO: Control characters
+- condense dicts
+- -s for silent (always for init)
 
 
 0.5.0 (2022-03-23)

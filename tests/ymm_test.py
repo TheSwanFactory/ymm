@@ -25,7 +25,11 @@ def test_run(y):
     assert value
 
 def test_dict(y):
-    result = y.run("env")
-    assert "value" in result[0]
-    value = y.env.get("key")
-    assert value
+    ri = y.run("init")
+    variables = y.env.flatstr()
+    d = variables["DICT"]
+    assert ':"' in d
+
+    result = y.run("echo")
+    assert ':"' in result[0]
+    jval = y.env.get("RESULT")

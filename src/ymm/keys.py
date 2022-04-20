@@ -1,5 +1,5 @@
 
-kCall='$'
+kCall='.'
 kID='.'
 kLog='debug'
 kLast='^'

@@ -5,6 +5,11 @@ from .scope import Scope
 
 def is_dict(d): return isinstance(d, dict)
 
+def shell(args):
+    result = subprocess.run(args, stdout=subprocess.PIPE)
+    msg = result.stdout.decode("utf-8").strip()
+    return msg
+
 class YMM:
     def __init__(self, yaml):
         self.env = Scope()
@@ -33,8 +38,7 @@ class YMM:
         args = expanded.split(" ")
         self.log(args, "commands")
         if args[0] == kCall: return "\n".join(self.run(args[1])) # run named action
-        result = subprocess.run(args, stdout=subprocess.PIPE)
-        msg = result.stdout.decode("utf-8").strip()
+        msg = shell(args)
         if msg and isinstance(msg,str): return self.save(msg, key)
         return msg
 

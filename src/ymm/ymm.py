@@ -50,7 +50,7 @@ class YMM:
         self.env.set(key, msg)
         return msg
 
-    def log(self, action, caption=False):
+    def log(self, event, caption=False):
         if self.env.get(kLog, False):
-            if caption: print(f'DEBUG_{caption}')
-            print(f'DEBUG {action}')
+            prefix = f'DEBUG_{caption}' if caption else 'DEBUG'
+            print(f'{prefix} {event}')

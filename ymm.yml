@@ -5,40 +5,40 @@
 # - dev
 
 init:
-    VERSION: cat version.txt
-    DATE: date -u +"%Y-%m-%dT%H:%M:%SZ"
+    VERSION: $ cat version.txt
+    DATE: $ date -u +"%Y-%m-%dT%H:%M:%SZ"
 
 build:
-    - pip install --upgrade pytest
-    - pip install --upgrade pytest-watch
-    - pip install --upgrade build
-    - pip install --upgrade twine
+    - $ pip install --upgrade pytest
+    - $ pip install --upgrade pytest-watch
+    - $ pip install --upgrade build
+    - $ pip install --upgrade twine
 
 test-install:
-    - $install
-    - ymm -v
-    - ymm echo
+    - . install
+    - $ ymm -v
+    - $ ymm echo
 
 echo:
-    SELF: echo "echo"
-    ECHO: echo {DATE}
+    SELF: echo
+    ECHO: {DATE}
 
 release:
-    - prerelease --no-input
-    - release --no-input
-    - python3 -m build
-    - python3 -m twine upload dist/*
-    - postrelease --no-input
+    - $ prerelease --no-input
+    - $ release --no-input
+    - $ python3 -m build
+    - $ python3 -m twine upload dist/*
+    - $ postrelease --no-input
 
 bump-dev:
-   NEW: awk -Fv {{printf("%sv%d\n",$1,$2+1)}} version.txt
-   UPDATED: sed -i .prev s/{VERSION}/{NEW}/ version.txt
+   NEW: $ awk -Fv {{printf("%sv%d\n",$1,$2+1)}} version.txt
+   UPDATED: $ sed -i .prev s/{VERSION}/{NEW}/ version.txt
 
 reinstall:
-    - $bump-dev
-    - $test-install
+    - . bump-dev
+    - . test-install
 
 dev:
-    - $bump-dev
-    - git commit -am {VERSION}
-    - git push
+    - . bump-dev
+    - $ git commit -am {VERSION}
+    - $ git push

@@ -9,7 +9,7 @@ In addition to simply creating lists and dictionaries, YMM can execute commands 
 ## Getting Started
 
 $ pip install ymm
-$ ymm --version 
+$ ymm --version
 
 
 ## Data Structures
@@ -35,8 +35,8 @@ Variables cascade via the following rules
 ## Control Characters
 
 1. '.' run this YMM action
-2. '+' execute this Python string (use '"""' for docstrings)
-3. '$' run this in the shell
+2. '$' run this in the shell
+3. '+' execute this Python string (use '"""' for docstrings)
 4. '^' pipe the prior result into this shell command
 5. '~' pipe the prior result into this jquery path
 

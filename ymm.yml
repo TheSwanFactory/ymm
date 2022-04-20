@@ -17,7 +17,7 @@ build:
 test-install:
     - . install
     - $ ymm -v
-    - $ ymm echo
+    - $ ymm version
 
 version:
     - "{VERSION}"

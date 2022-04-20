@@ -4,13 +4,13 @@
 # - release
 # - dev
 init:
-  KEY: $ echo "value"
+  KEY: value
   DICT:
     A: B
     C: D
 
 install:
-    - $ echo "install test"
+    - install test
 
 call:
     - . echo

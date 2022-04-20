@@ -39,8 +39,7 @@ class YMM:
         self.log(args, "commands")
         sigil = args.pop(0)
         if sigil == kCall: return "\n".join(self.run(args[0])) # run named action
-        #if sigil == kShell:
-        text = shell(args)
+        if sigil == kShell: text = shell(args)
         if text and isinstance(text,str): return self.save(text, key)
         return text
 

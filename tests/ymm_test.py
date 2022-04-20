@@ -23,6 +23,7 @@ def test_run(y):
     key = f'{FIRST_KEY}#0'
     value = y.env.get(key)
     assert value
+    assert 'echo' not in value
 
 def test_dict(y):
     ri = y.run("init")

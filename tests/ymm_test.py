@@ -36,4 +36,5 @@ def test_dict(y):
     assert result == jval
 
 def test_call(y):
-    result = y.run('call')
+    result = y.run('call')[0]
+    assert ':"' in result

@@ -23,7 +23,7 @@ version:
     - {VERSION}
 
 echo:
-    SELF: echo
+    WORD: word
     ECHO: {DATE}
 
 release:

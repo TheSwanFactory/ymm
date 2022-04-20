@@ -25,6 +25,8 @@ class YMM:
             sys.exit(msg)
         self.env.push(action)
         cmds = self.env.get(action)
+        self.log(cmds, action)
+
         cdict = cmds if is_dict(cmds) else {f'{action}#{i}': cmd for i,cmd in enumerate(cmds)}
         results = [self.execute(v, k) for k,v in cdict.items()]
         self.printOutput = currentOutput
@@ -35,7 +37,7 @@ class YMM:
         if not isinstance(cmd,str): return self.save(cmd, key)
         variables = self.env.flatstr()
         text = cmd.format(**variables)
-        self.log(text, "substituted")
+        self.log(text, "formatted")
         args = text.split(" ")
         sigil = args.pop(0)
         body = " ".join(args)
@@ -57,4 +59,5 @@ class YMM:
     def log(self, event, caption=False):
         if self.env.get(kLog, False):
             prefix = f'DEBUG:{caption}' if caption else 'DEBUG'
-            print(f'{prefix} {event}')
+            print(prefix, end=' ')
+            print(event)

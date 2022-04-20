@@ -19,8 +19,9 @@ class YMM:
             msg = f'ERROR: action [{action}] not found' if action != DEFAULT_ACTION else "Exiting"
             sys.exit(msg)
         self.env.push(action)
-        commands = self.env.get(action)
-        results = [self.execute(v, k) for k,v in commands.items()] if is_dict(commands) else [self.execute(cmd, f'{action}#{i}') for i,cmd in enumerate(commands)]
+        cmds = self.env.get(action)
+        cdict = cmds if is_dict(cmds) else {f'{action}#{i}': cmd for i,cmd in enumerate(cmds)}
+        results = [self.execute(v, k) for k,v in cdict.items()]
         if hide: self.printOutput = currentOutput
         return results
 

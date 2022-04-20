@@ -13,7 +13,7 @@ install:
     - echo "install test"
 
 call:
-    - $echo
+    - $ echo
 
 echo:
     RESULT: echo {DICT}

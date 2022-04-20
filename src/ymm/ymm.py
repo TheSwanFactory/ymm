@@ -30,9 +30,9 @@ class YMM:
         if not isinstance(cmd,str): return self.save(cmd, key)
         variables = self.env.flatstr()
         expanded = cmd.format(**variables)
-        if expanded[0] == kCall: return "\n".join(self.run(cmd[1:])) # run named action
         args = expanded.split(" ")
         self.log(args, "commands")
+        if args[0] == kCall: return "\n".join(self.run(args[1])) # run named action
         result = subprocess.run(args, stdout=subprocess.PIPE)
         msg = result.stdout.decode("utf-8").strip()
         if msg and isinstance(msg,str): return self.save(msg, key)

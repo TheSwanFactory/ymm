@@ -1,5 +1,6 @@
 
 kCall='.'
+kShell='$'
 kID='.'
 kLog='debug'
 kLast='^'

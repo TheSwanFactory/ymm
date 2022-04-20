@@ -34,13 +34,15 @@ class YMM:
         self.log(f'! {key}: {cmd}', "execute")
         if not isinstance(cmd,str): return self.save(cmd, key)
         variables = self.env.flatstr()
-        expanded = cmd.format(**variables)
-        args = expanded.split(" ")
+        text = cmd.format(**variables)
+        args = text.split(" ")
         self.log(args, "commands")
-        if args[0] == kCall: return "\n".join(self.run(args[1])) # run named action
-        msg = shell(args)
-        if msg and isinstance(msg,str): return self.save(msg, key)
-        return msg
+        sigil = args.pop(0)
+        if sigil == kCall: return "\n".join(self.run(args[0])) # run named action
+        #if sigil == kShell:
+        text = shell(args)
+        if text and isinstance(text,str): return self.save(text, key)
+        return text
 
     def save(self, msg, key):
         if self.printOutput: print(f'# {key}: {msg}')

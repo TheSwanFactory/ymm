@@ -4,7 +4,13 @@ YAML Mimics Makefiles
 YMM is one of the first examples of YAAPL: YAML as a Programming Language
 
 YMM uses standard YAML files with a few special conventions to function as a task runner.
-In addition to simply creating lists and dictionaries, YMM can execute commands (and thus return values) based on the 'contral character' at the beginning of a line.
+In addition to simply creating lists and dictionaries, YMM can execute commands (and thus return values) based on the 'control character' at the beginning of a line.
+
+## Getting Started
+
+$ pip install ymm
+$ ymm --version 
+
 
 ## Data Structures
 

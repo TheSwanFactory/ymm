@@ -28,12 +28,12 @@ class YMM:
     def execute(self, cmd, key):
         self.log(f'! {key}: {cmd}', "execute")
         if not isinstance(cmd,str): return self.save(cmd, key)
-        if cmd[0] == kCall: return "\n".join(self.run(cmd[1:]))
         variables = self.env.flatstr()
-        sub = cmd.format(**variables)
-        commands = sub.split(" ")
-        self.log(commands, "commands")
-        result = subprocess.run(commands, stdout=subprocess.PIPE)
+        expanded = cmd.format(**variables)
+        if expanded[0] == kCall: return "\n".join(self.run(cmd[1:])) # run named action
+        args = expanded.split(" ")
+        self.log(args, "commands")
+        result = subprocess.run(args, stdout=subprocess.PIPE)
         msg = result.stdout.decode("utf-8").strip()
         if msg and isinstance(msg,str): return self.save(msg, key)
         return msg

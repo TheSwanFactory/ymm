@@ -12,5 +12,8 @@ init:
 install:
     - echo "install test"
 
+call:
+    - $echo
+
 echo:
     RESULT: echo {DICT}

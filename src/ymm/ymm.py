@@ -17,7 +17,7 @@ class YMM:
         self.actions = self.env.actions()
         self.printOutput = True
 
-    def run(self,action=DEFAULT_ACTION, hide=True):
+    def run(self,action=DEFAULT_ACTION, hide=False):
         currentOutput = self.printOutput
         if hide: self.printOutput = False
         if not action in self.actions:
@@ -27,7 +27,7 @@ class YMM:
         cmds = self.env.get(action)
         cdict = cmds if is_dict(cmds) else {f'{action}#{i}': cmd for i,cmd in enumerate(cmds)}
         results = [self.execute(v, k) for k,v in cdict.items()]
-        if hide: self.printOutput = currentOutput
+        self.printOutput = currentOutput
         return results
 
     def execute(self, cmd, key):
@@ -35,11 +35,15 @@ class YMM:
         if not isinstance(cmd,str): return self.save(cmd, key)
         variables = self.env.flatstr()
         text = cmd.format(**variables)
+        self.log(text, "substituted")
         args = text.split(" ")
-        self.log(args, "commands")
         sigil = args.pop(0)
-        if sigil == kCall: return "\n".join(self.run(args[0])) # run named action
+        body = " ".join(args)
+        self.log(sigil, "sigil")
+        self.log(body, "body")
+        if sigil == kCall: return "\n".join(self.run(body)) # run named action
         if sigil == kShell: text = shell(args)
+        self.log(text, "text")
         if text and isinstance(text,str): return self.save(text, key)
         return text
 
@@ -52,5 +56,5 @@ class YMM:
 
     def log(self, event, caption=False):
         if self.env.get(kLog, False):
-            prefix = f'DEBUG_{caption}' if caption else 'DEBUG'
+            prefix = f'DEBUG:{caption}' if caption else 'DEBUG'
             print(f'{prefix} {event}')

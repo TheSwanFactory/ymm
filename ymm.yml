@@ -20,11 +20,11 @@ test-install:
     - $ ymm echo
 
 version:
-    - {VERSION}
+    - "{VERSION}"
 
 echo:
     WORD: word
-    ECHO: {DATE}
+    ECHO: "{DATE}"
 
 release:
     - $ prerelease --no-input

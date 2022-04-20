@@ -9,10 +9,10 @@ init:
     DATE: date -u +"%Y-%m-%dT%H:%M:%SZ"
 
 build:
-    - pip3 install --upgrade pytest
-    - pip3 install --upgrade pytest-watch
-    - pip3 install --upgrade build
-    - pip3 install --upgrade twine
+    - pip install --upgrade pytest
+    - pip install --upgrade pytest-watch
+    - pip install --upgrade build
+    - pip install --upgrade twine
 
 test-install:
     - $install

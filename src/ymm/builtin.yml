@@ -5,7 +5,7 @@
 # - dev
 
 install:
-    - pip3 install -r requirements.txt
+    - pip install -r requirements.txt
     - ymm --version
 
 test:
@@ -15,4 +15,4 @@ watch:
     - echo Use `ptw --onpass "say passed" --onfail "say failed"`
 
 ymm:
-    - pip3 install --upgrade ymm
+    - pip install --upgrade ymm

@@ -8,9 +8,16 @@ FIRST_KEY='install'
 def y():
     return ymm.load_file(TEST_FILE)
 
-def test_exec(y):
-    #print(dir(ymm))
-    args = Args(['install'])
+def yexec(y, s):
+    args = Args([s])
     result = ymm.exec(y,args)
-    #print(result)
+    return result
+
+def test_exec(y):
+    result = yexec(y, 'install')
     assert FIRST_KEY in result[0]
+
+def test_call(y):
+    s = "$ ls"
+    result = y.execute(s, "call")
+    assert "test" in result

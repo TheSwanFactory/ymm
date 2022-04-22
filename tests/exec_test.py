@@ -27,3 +27,7 @@ def test_shell(y):
 def test_call(y):
     result = yexec(y, 'call')
     assert '"A":"B"' in result[0]
+
+def test_eval(y):
+    result = yexec(y, 'python')
+    assert 4 in result#[0]

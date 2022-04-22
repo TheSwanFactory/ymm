@@ -45,8 +45,9 @@ class YMM:
         self.log(body, "body")
         if sigil == kCall: return "\n".join(self.run(body)) # run named action
         if sigil == kShell: text = shell(args)
+        if sigil == kEval: text = eval(body)
         self.log(text, "text")
-        if text and isinstance(text,str): return self.save(text, key)
+        if text and not isinstance(text,dict): return self.save(text, key)
         return text
 
     def save(self, msg, key):

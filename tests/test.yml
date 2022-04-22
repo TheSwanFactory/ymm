@@ -17,3 +17,6 @@ call:
 
 echo:
     RESULT: $ echo {DICT}
+
+python:
+    - + 2 + 2

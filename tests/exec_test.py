@@ -17,15 +17,13 @@ def test_exec(y):
     result = yexec(y, 'install')
     assert FIRST_KEY in result[0]
 
-def test_echo(y):
+def test_shell(y):
+    s = "$ ls"
+    result = y.execute(s, "shell")
+    assert "test" in result
     result = yexec(y, 'echo')
     assert '"A":"B"' in result[0]
 
 def test_call(y):
     result = yexec(y, 'call')
     assert '"A":"B"' in result[0]
-
-def test_shell(y):
-    s = "$ ls"
-    result = y.execute(s, "shell")
-    assert "test" in result

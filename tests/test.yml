@@ -19,4 +19,16 @@ echo:
     RESULT: $ echo {DICT}
 
 python:
-    - + 2 + 2
+    - _ 2 + 2
+
+pvar:
+    IN: 2 + 2
+    OUT: _ {IN}
+
+pipe:
+    IN: "Hello"
+    OUT: ^ xargs
+
+path:
+    IN: "{DICT}"
+    OUT: ~ A

@@ -1,6 +1,6 @@
 
 kCall='.'
-kEval='+'
+kEval='_'
 kMatch='~'
 kPipe='^'
 kShell='$'

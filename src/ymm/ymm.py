@@ -2,6 +2,9 @@ import subprocess
 import sys
 from .keys import *
 from .scope import Scope
+from subprocess import Popen, PIPE, STDOUT
+import jmespath
+import json
 
 def is_dict(d): return isinstance(d, dict)
 
@@ -9,6 +12,20 @@ def shell(args):
     result = subprocess.run(args, stdout=subprocess.PIPE)
     msg = result.stdout.decode("utf-8").strip()
     return msg
+
+def pipe(args, prior):
+    p = Popen(args, stdout=PIPE, stdin=PIPE, stderr=PIPE)
+    result = p.communicate(input=prior.encode())[0]
+    return result.decode()
+
+def match(body, prior):
+    jdata = json.loads(prior)
+    print(f'match.body: {body}')
+    print(f'match.prior: {jdata}')
+    matches = jmespath.search(body, jdata)
+    print('match: ',end='')
+    print(matches)
+    return matches
 
 class YMM:
     def __init__(self, yaml):
@@ -46,6 +63,8 @@ class YMM:
         if sigil == kCall: return "\n".join(self.run(body)) # run named action
         if sigil == kShell: text = shell(args)
         if sigil == kEval: text = eval(body)
+        if sigil == kPipe: text = pipe(args, self.env.get(kLast))
+        if sigil == kMatch: text = match(body, self.env.get(kLast))
         self.log(text, "text")
         #if text and not isinstance(text,dict):
         return self.save(text, key)

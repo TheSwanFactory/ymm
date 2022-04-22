@@ -47,8 +47,8 @@ class YMM:
         if sigil == kShell: text = shell(args)
         if sigil == kEval: text = eval(body)
         self.log(text, "text")
-        if text and not isinstance(text,dict): return self.save(text, key)
-        return text
+        #if text and not isinstance(text,dict):
+        return self.save(text, key)
 
     def save(self, msg, key):
         if self.printOutput: print(f'# {key}: {msg}')

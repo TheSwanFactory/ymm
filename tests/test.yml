@@ -32,3 +32,9 @@ pipe:
 path:
     IN: "{DICT}"
     OUT: ~ A
+
+run-param:
+  JOB: 484
+  PARAM: RSERIAL1
+  PRINT: databricks jobs run-now --job-id {JOB} --notebook-params '{{"CONF":"{PARAM}","DEBUG":"DEBUG"}}'
+  DBRUN: $ databricks jobs run-now --job-id {JOB} --notebook-params {{"CONF":"{PARAM}","DEBUG":"DEBUG"}}

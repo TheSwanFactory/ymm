@@ -10,6 +10,7 @@ def is_dict(d): return isinstance(d, dict)
 
 def shell(args):
     result = subprocess.run(args, stdout=subprocess.PIPE)
+    print(f'shell.result: {result}')
     msg = result.stdout.decode("utf-8").strip()
     return msg
 
@@ -19,6 +20,7 @@ def pipe(args, prior):
     return result.decode()
 
 def match(body, prior):
+    print(f'match.prior: {prior}')
     jdata = json.loads(prior)
     print(f'match.body: {body}')
     print(f'match.prior: {jdata}')
@@ -67,6 +69,7 @@ class YMM:
         if sigil == kMatch: text = match(body, self.env.get(kLast))
         self.log(text, "text")
         #if text and not isinstance(text,dict):
+        text = text if isinstance(text, str) else f'{text}'
         return self.save(text, key)
 
     def save(self, msg, key):

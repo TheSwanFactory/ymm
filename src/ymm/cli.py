@@ -57,7 +57,8 @@ def exec(ymm, args):
     results=[]
     for action in actions:
         print(f'; {action}')
-        results.append(ymm.run(action))
+        result = ymm.run(action)
+        results.append(result)
     return flatten(results)
 
 def main():

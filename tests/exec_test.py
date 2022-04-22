@@ -32,9 +32,9 @@ def test_call(y):
 
 def test_eval(y):
     result = yexec(y, 'python')
-    assert 4 in result#[0]
+    assert "4" in result#[0]
     result = yexec(y, 'pvar')
-    assert 4 in result#[0]
+    assert "4" in result#[0]
 
 def test_pipe(y):
     result = yexec(y, 'pipe')
@@ -44,3 +44,7 @@ def test_pipe(y):
 def test_match(y):
     result = yexec(y, 'path')
     assert 'B' in result[1]
+
+def test_param(y):
+    result = yexec(y, 'run-param')
+    assert 'run_id' in result[-1]

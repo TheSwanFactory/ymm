@@ -4,13 +4,31 @@
 # - release
 # - dev
 init:
-  KEY: echo "value"
+  KEY: value
   DICT:
     A: B
     C: D
 
 install:
-    - echo "install test"
+    - install test
+
+call:
+    - . echo
 
 echo:
-    RESULT: echo {DICT}
+    RESULT: $ echo {DICT}
+
+python:
+    - _ 2 + 2
+
+pvar:
+    IN: 2 + 2
+    OUT: _ {IN}
+
+pipe:
+    IN: "Hello"
+    OUT: ^ xargs
+
+path:
+    IN: "{DICT}"
+    OUT: ~ A

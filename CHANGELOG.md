@@ -1,13 +1,19 @@
-0.6.1 (unreleased)
+0.6.2 (unreleased)
 ------------------
 
 - Nothing changed yet.
 
 
+0.6.1 (2022-04-22)
+------------------
+
+- updated README and dependencies
+- Control characters
+
+
 0.6.0 (2022-04-05)
 ------------------
 
-- TODO: Control characters
 - condense dicts
 - -s for silent (always for init)
 

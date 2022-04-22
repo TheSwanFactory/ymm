@@ -23,6 +23,7 @@ def test_run(y):
     key = f'{FIRST_KEY}#0'
     value = y.env.get(key)
     assert value
+    assert 'echo' not in value
 
 def test_dict(y):
     ri = y.run("init")
@@ -30,6 +31,11 @@ def test_dict(y):
     d = variables["DICT"]
     assert ':"' in d
 
-    result = y.run("echo")
-    assert ':"' in result[0]
+    result = y.run("echo")[0]
+    assert ':"' in result
     jval = y.env.get("RESULT")
+    assert result == jval
+
+def test_call(y):
+    result = y.run('call')[0]
+    assert ':"' in result

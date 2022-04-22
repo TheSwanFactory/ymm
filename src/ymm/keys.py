@@ -1,9 +1,12 @@
 
-kCall='$'
+kCall='.'
+kEval='_'
+kMatch='~'
+kPipe='^'
+kShell='$'
 kID='.'
 kLog='debug'
 kLast='^'
-kPrior='^^'
 
 MOD="ymm"
 BUILTIN_FILE="builtin.yml"

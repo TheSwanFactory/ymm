@@ -44,7 +44,7 @@ def print_actions(keys, list_actions):
 def init(ymm, no_init, has_key):
     ymm.log(f'no_init:{no_init} has_key:{has_key}', "init")
     if (not no_init) & has_key:
-        ymm.run(INIT_ACTION)
+        ymm.run(INIT_ACTION, True)
 
 def exec(ymm, args):
     ymm.log(args, "args")

@@ -1,7 +1,14 @@
 0.6.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Updated README for JMESpath
+
+
+0.6.1 (2022-04-22)
+------------------
+
+- updated README and dependencies
+- Control characters
 
 
 0.6.1 (2022-04-22)

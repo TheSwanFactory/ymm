@@ -11,7 +11,6 @@ In addition to simply creating lists and dictionaries, YMM can execute commands 
 $ pip install ymm
 $ ymm --version
 
-
 ## Data Structures
 
 YMM files have a top-level dictionary, whose keys are called "actions."
@@ -36,12 +35,13 @@ Variables cascade via the following rules
 
 1. '.' run this YMM action
 2. '$' run this in the shell
-3. '+' execute this Python string (use '"""' for docstrings)
+3. '_' execute this Python string (use '"""' for docstrings)
 4. '^' pipe the prior result into this shell command
-5. '~' pipe the prior result into this jquery path
+5. '~' pipe the prior result into this [JMESpath](https://jmespath.org) pattern
 
 ## Motivation
 
 Because I love YAML, and miss `rake`.
-I tried PyPyr, which is brilliant but painfully verbose.
-I was going to write a preprocessor, then realized it was simpler to just execute the commands myself.
+I tried [PyPyr](https://pypyr.io), which is brilliant but painfully verbose.
+I was going to write a preprocessor for that, then realized it was simpler to just execute the commands myself.
+Then I just kept adding features for things I wanted to automate...

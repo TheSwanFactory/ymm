@@ -2,6 +2,8 @@
 ------------------
 
 - Updated README for JMESpath
+- stringify numerical results
+- modularize control
 
 
 0.6.1 (2022-04-22)

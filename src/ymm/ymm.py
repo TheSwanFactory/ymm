@@ -8,27 +8,6 @@ import json
 
 def is_dict(d): return isinstance(d, dict)
 
-def shell(args):
-    result = subprocess.run(args, stdout=subprocess.PIPE)
-    print(f'shell.result: {result}')
-    msg = result.stdout.decode("utf-8").strip()
-    return msg
-
-def pipe(args, prior):
-    p = Popen(args, stdout=PIPE, stdin=PIPE, stderr=PIPE)
-    result = p.communicate(input=prior.encode())[0]
-    return result.decode()
-
-def match(body, prior):
-    print(f'match.prior: {prior}')
-    jdata = json.loads(prior)
-    print(f'match.body: {body}')
-    print(f'match.prior: {jdata}')
-    matches = jmespath.search(body, jdata)
-    print('match: ',end='')
-    print(matches)
-    return matches
-
 class YMM:
     def __init__(self, yaml):
         self.env = Scope()
@@ -63,10 +42,10 @@ class YMM:
         self.log(sigil, "sigil")
         self.log(body, "body")
         if sigil == kCall: return "\n".join(self.run(body)) # run named action
-        if sigil == kShell: text = shell(args)
+        if sigil == kShell: text = self.shell(args)
         if sigil == kEval: text = eval(body)
-        if sigil == kPipe: text = pipe(args, self.env.get(kLast))
-        if sigil == kMatch: text = match(body, self.env.get(kLast))
+        if sigil == kPipe: text = self.pipe(args)
+        if sigil == kMatch: text = self.match(body)
         self.log(text, "text")
         #if text and not isinstance(text,dict):
         text = text if isinstance(text, str) else f'{text}'
@@ -84,3 +63,24 @@ class YMM:
             prefix = f'DEBUG:{caption}' if caption else 'DEBUG'
             print(prefix, end=' ')
             print(event)
+
+    def shell(self, args):
+        result = subprocess.run(args, stdout=subprocess.PIPE)
+        self.log(result, 'shell.result')
+        msg = result.stdout.decode("utf-8").strip()
+        return msg
+
+    def pipe(self, args):
+        prior = self.env.get(kLast)
+        p = Popen(args, stdout=PIPE, stdin=PIPE, stderr=PIPE)
+        result = p.communicate(input=prior.encode())[0]
+        return result.decode()
+
+    def match(self, body):
+        prior = self.env.get(kLast)
+        self.log(prior, 'match.prior')
+        jdata = json.loads(prior)
+        self.log(body, 'match.body')
+        self.log(jdata, 'match.jdata')
+        matches = jmespath.search(body, jdata)
+        return matches
